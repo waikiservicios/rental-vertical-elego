@@ -43,7 +43,7 @@ class SaleOrder(models.Model):
 
     def action_view_delivery(self):
         self.ensure_one()
-        action = self.env.ref("stock.action_picking_tree_all").read()[0]
+        action = self.env["ir.actions.actions"]._for_xml_id("stock.action_picking_tree_all")
         picking_ids = self._get_all_picking_ids()[self.id]
         if len(picking_ids) > 1:
             action["domain"] = [("id", "in", picking_ids)]
